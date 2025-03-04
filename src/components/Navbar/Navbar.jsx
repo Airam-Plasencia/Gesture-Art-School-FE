@@ -9,7 +9,20 @@ function Navbar() {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
 
   return (
-    <nav>
+    <nav className=" p-4">
+    <div className="flex items-center justify-between">
+      {/* Logo */}
+      <div className="flex items-center">
+        <img src="/img/logo.png" alt="Logo" className="h-96 max-w-sm mr-4" />
+      </div>
+
+      {/* Links */}
+      <div className="flex space-x-6">
+        <Link to="/" className="text-gray hover:text-gray-300">Cursos</Link>
+        <Link to="/professores" className="text-gray hover:text-gray-300">Profesores</Link>
+        <Link to="/about" className="text-gray hover:text-gray-300">About</Link>
+        <Link to="/galeria" className="text-gray hover:text-gray-300">Galería</Link>
+      </div>
       <Link to="/">
         <button>Home</button>
       </Link>
@@ -39,6 +52,7 @@ function Navbar() {
           </Link>
         </>
       )}
+       </div>
     </nav>
   );
 }
