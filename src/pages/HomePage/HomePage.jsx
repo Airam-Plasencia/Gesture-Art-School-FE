@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
 
 function HomePage() {
 
@@ -76,6 +78,11 @@ function HomePage() {
             <p className="text-lg">
               Do you feel stuck in your art education, frustrated with watching videos, trying to follow along and not getting anywhere? We start with a personal interview so we get to know who you are and then best support you.
             </p>
+            <Link to="/teachers">
+              <button className="mt-4 px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition-colors">
+                View More
+              </button>
+            </Link>
           </div>
 
           <div>
@@ -101,6 +108,11 @@ function HomePage() {
           <p className="text-lg">
             Figure drawing not only enhances your understanding of anatomy, but also unlocks creative expression, opening doors to numerous art careers. Whether you want to be a storyboard artist, character designer, or an animator, mastering figure drawing gives you the skills and confidence to pursue your dream career. With personal mentorship and tailored lessons, we help you grow at your own pace and achieve your goals.
           </p>
+          <Link to="/courses">
+            <button className="mt-4 px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition-colors">
+              View More
+            </button>
+          </Link>
         </div>
       </div>
 

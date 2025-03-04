@@ -23,7 +23,7 @@ function Navbar() {
           <Link to="/">
             <button className="text-gray hover:text-orange-500">Home</button>
           </Link>
-          <Link to="/" className="text-gray hover:text-orange-500">Courses</Link>
+          <Link to="/courses" className="text-gray hover:text-orange-500">Courses</Link>
           <Link to="/teachers" className="text-gray hover:text-orange-500">Teachers</Link>
           <Link to="/about" className="text-gray hover:text-orange-500">About</Link>
           <Link to="/gallery" className="text-gray hover:text-orange-500">Gallery</Link>
