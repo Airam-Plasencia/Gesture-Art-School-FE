@@ -99,7 +99,7 @@ function HomePage() {
         <div className="w-1/2">
           <img
             src="https://static.wixstatic.com/media/c2d311_7a0fa713906c44b79d5ef5ec19e600c2~mv2.jpg/v1/fill/w_1225,h_700,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/c2d311_7a0fa713906c44b79d5ef5ec19e600c2~mv2.jpg"
-            alt="Artist Image"
+            alt="Portrait of the artist"
             className="w-full h-auto"
           />
         </div>
