@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-
 
 function HomePage() {
 
@@ -13,11 +12,9 @@ function HomePage() {
     'https://static.wixstatic.com/media/c2d311_1b548556ccfe4876969e3d89c17e4823~mv2.jpg/v1/fill/w_1225,h_700,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/c2d311_1b548556ccfe4876969e3d89c17e4823~mv2.jpg',
   ];
 
-
-  const nextSlide = () => {
+  const nextSlide = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-  };
-
+  }, [images.length]);
 
   const prevSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
@@ -26,10 +23,11 @@ function HomePage() {
   useEffect(() => {
     const interval = setInterval(nextSlide, 9000);
     return () => clearInterval(interval);
-  }, []);
+  }, [nextSlide]);
 
   return (
     <div>
+      {/* Sección de la portada */}
       <div className="flex items-center justify-between p-10">
         <div className="w-1/2">
           <h2 className="text-blue-500 text-4xl font-semibold mb-4">
@@ -50,6 +48,7 @@ function HomePage() {
         </div>
       </div>
 
+      {/* Sección de por qué elegir Figure Drawing */}
       <div className="bg-gray-700 text-white py-10">
         <div className="flex items-center justify-between max-w-screen-xl mx-auto">
           <div className="w-1/2">
@@ -71,6 +70,7 @@ function HomePage() {
         </div>
       </div>
 
+      {/* Carrusel de imágenes */}
       <div className="py-20 relative">
         <div className="max-w-screen-xl mx-auto px-10 text-black flex items-center justify-between">
           <div className="bg-gray w-1/2 pr-10">
@@ -79,7 +79,7 @@ function HomePage() {
               Do you feel stuck in your art education, frustrated with watching videos, trying to follow along and not getting anywhere? We start with a personal interview so we get to know who you are and then best support you.
             </p>
             <Link to="/teachers">
-              <button className="mt-4 px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition-colors">
+              <button className="mt-4 px-6 py-2 bg-blue-500 text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
                 View More
               </button>
             </Link>
@@ -95,28 +95,7 @@ function HomePage() {
         </div>
       </div>
 
-      <div className="flex items-center justify-between py-20 max-w-screen-xl mx-auto px-10">
-        <div className="w-1/2">
-          <img
-            src="https://static.wixstatic.com/media/c2d311_7a0fa713906c44b79d5ef5ec19e600c2~mv2.jpg/v1/fill/w_1225,h_700,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/c2d311_7a0fa713906c44b79d5ef5ec19e600c2~mv2.jpg"
-            alt="Artist Image"
-            className="w-full h-auto"
-          />
-        </div>
-        <div className="w-1/2 pl-10 text-gray-800">
-          <h3 className="text-3xl font-semibold mb-4">02: Courses</h3>
-          <p className="text-lg">
-            Figure drawing not only enhances your understanding of anatomy, but also unlocks creative expression, opening doors to numerous art careers. Whether you want to be a storyboard artist, character designer, or an animator, mastering figure drawing gives you the skills and confidence to pursue your dream career. With personal mentorship and tailored lessons, we help you grow at your own pace and achieve your goals.
-          </p>
-          <Link to="/courses">
-            <button className="mt-4 px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition-colors">
-              View More
-            </button>
-          </Link>
-        </div>
-      </div>
-
-
+      {/* Carrusel de imágenes en fondo */}
       <div className="py-20 bg-gray-100">
         <h2 className="text-2xl text-center text-orange-500 font-bold mb-4">
           If you are offered the opportunity to do something that you don’t know how to do – say yes, dive in and do it anyway.
@@ -144,6 +123,8 @@ function HomePage() {
           </button>
         </div>
       </div>
+
+      {/* Footer */}
       <div className="bg-gray-800 text-white py-4">
         <div className="max-w-screen-xl mx-auto text-center">
           <p className="text-sm">
@@ -162,5 +143,6 @@ function HomePage() {
 }
 
 export default HomePage;
+
 
 
