@@ -1,15 +1,18 @@
 import "./Navbar.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/auth.context";
 
-
-
 function Navbar() {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
+  const location = useLocation(); // Usamos el hook useLocation para saber en qué página estamos
+
+  // Verificamos si estamos en la página de Signup
+  const isSignupPage = location.pathname === "/signup";
 
   return (
-    <nav className="p-4">
+    // Aplicamos la clase 'hidden' si estamos en la página de Signup
+    <nav className={`p-4 ${isSignupPage ? 'hidden' : ''}`}>
       <div className="flex items-center justify-between">
         <div className="flex items-center mr-2">
           {/* <Link to="/">  */}
