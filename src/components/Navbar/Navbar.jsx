@@ -5,24 +5,24 @@ import { AuthContext } from "../../context/auth.context";
 
 function Navbar() {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
-  const location = useLocation(); // Usamos el hook useLocation para saber en qué página estamos
+  const location = useLocation(); 
 
-  // Verificamos si estamos en la página de Signup
+ 
   const isSignupPage = location.pathname === "/signup";
 
   return (
-    // Aplicamos la clase 'hidden' si estamos en la página de Signup
+    
     <nav className={`p-4 ${isSignupPage ? 'hidden' : ''}`}>
       <div className="flex items-center justify-between">
         <div className="flex items-center mr-2">
-          {/* <Link to="/">  */}
+          
             <img src="/img/logo.png" alt="Logo" className="h-40 max-w-sm" />
             <span className="ml-4 text-3xl font-bold">
               <span className="text-blue-500">Gesture</span>{' '}
               <span className="text-orange-500">Art</span>{' '}
               <span className="text-gray-500">School</span>
             </span> 
-         {/*  </Link> */}
+         
         </div>
         
         <div className="flex space-x-6 ml-auto">
