@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage/HomePage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import SignupPage from "./pages/SignupPage/SignupPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
+import Gallery from './pages/Gallery/Gallery';
 import './index.css';
 
 import Navbar from "./components/Navbar/Navbar";
@@ -19,7 +20,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
-
+        <Route path="/gallery" element={<Gallery />} />
         <Route
           path="/profile"
           element={
