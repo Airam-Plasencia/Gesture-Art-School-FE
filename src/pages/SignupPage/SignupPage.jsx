@@ -102,7 +102,7 @@ function SignupPage() {
 
           {errorMessage && <p className="text-red-500 text-center mt-4">{errorMessage}</p>}
 
-          <p className="text-center mt-4">Already have an account? 
+          <p className="text-center text-white mt-4">Already have an account? 
             <Link to="/login" className="text-blue-500 hover:underline"> Login</Link>
           </p>
         </div>
