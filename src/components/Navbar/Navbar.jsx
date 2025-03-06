@@ -8,11 +8,11 @@ function Navbar() {
   const location = useLocation(); 
 
  
-  const isSignupPage = location.pathname === "/signup";
+  const isLoginOrSignupPage = location.pathname === "/login" || location.pathname === "/signup";
 
   return (
     
-    <nav className={`p-4 ${isSignupPage ? 'hidden' : ''}`}>
+    <nav className={`p-4 ${isLoginOrSignupPage ? 'hidden' : ''}`}>
       <div className="flex items-center justify-between">
         <div className="flex items-center mr-2">
           
