@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 function Teachers() {
   const [teachers, setTeachers] = useState([]);
-  const [loading, setLoading] = useState(true); 
-  const [error, setError] = useState(null); 
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_SERVER_URL}/teachers`) 
-       .then(response => {
-        setTeachers(response.data); 
-        setLoading(false); 
+    axios.get(`${process.env.REACT_APP_SERVER_URL}/teachers`)
+      .then(response => {
+        setTeachers(response.data);
+        setLoading(false);
       })
       .catch(err => {
         setError('Error al cargar los datos');
@@ -20,59 +20,99 @@ function Teachers() {
   }, []);
 
   if (loading) {
-    return <div className="text-center text-xl">Cargando...</div>; 
+    return <div>Cargando...</div>;
   }
 
   if (error) {
-    return <div className="text-center text-xl text-red-500">{error}</div>; 
+    return <div>{error}</div>;
   }
 
   return (
-    <div>
-      <div className="p-6 space-y-6">
-        <h2 className="text-3xl font-bold text-blue-500 text-center">Our Teachers</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {teachers.map((teacher) => (
-            <div key={teacher.email} className="bg-white shadow-lg rounded-lg p-4">
-              <Link to={`/teachers/${teacher._id}`}> 
-                <img
-                  src={teacher.image}
-                  alt={`${teacher.firstName} ${teacher.lastName}`}
-                  className="w-full h-80 object-cover rounded-md cursor-pointer"
-                />
-              </Link>
-              <div className="mt-4">
-                <h3 className="text-xl text-orange-500 font-semibold">{teacher.firstName} {teacher.lastName}</h3>
+    <div className="teacher-list">
+      <h2 className="text-3xl font-bold text-blue-500 text-center">Our Teachers</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+        {teachers.map(teacher => (
+          <div key={teacher._id} className="bg-white text-orange-500 shadow-lg rounded-lg p-6">
+            <Link to={`/teachers/${teacher._id}`} className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-6">
+
+              <img
+                src={teacher.image}
+                alt={`${teacher.firstName} ${teacher.lastName}`}
+                className="w-32 h-32 object-cover rounded-full"
+              />
+
+              <div className="flex-1">
+                <h3 className="text-xl font-semibold">{teacher.firstName} {teacher.lastName}</h3>
                 <p className="text-gray-700 font-semibold">{teacher.program}</p>
-                <p className="text-gray-700 font-semibold">{teacher.background}</p>
-                <a
-                  href={teacher.linkedinUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-500 hover:text-blue-700 mt-2 block"
-                >
-                  Ver LinkedIn
-                </a>
-                <div className="mt-4">
-                  <h4 className="font-semibold">Cursos:</h4>
-                  {teacher.courses && teacher.courses.length > 0 ? (
-                    <ul className="list-none pl-5">
-                      {teacher.courses.map((course, index) => (
-                        <li key={course._id}>Curso {course["0"]}</li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <p>No hay cursos disponibles</p>
-                  )}
-                </div>
+                <p className="text-gray-700 mt-2 font-semibold">{teacher.background}</p>
+                <p className="text-gray-500 mt-2">{teacher.email}</p>
+                <p className="text-gray-500">{teacher.phone}</p>
               </div>
-            </div>
-          ))}
+            </Link>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-12 bg-white p-6 rounded-lg flex items-center space-x-6">
+        {/* Imagen más grande */}
+        <img
+          src="https://images.squarespace-cdn.com/content/v1/5b36001250a54ff3fd2787b9/1611047828875-GPZO097XRMYYUZI8PAZ5/th3kpX0QbqfZ1M7hLBUI_Screen_Shot_2018-10-01_at_10.21.37_PM.png"
+          alt="Experience"
+          className="w-48 h-48 object-cover rounded-md"
+        />
+
+        <div className="flex-1">
+          <p className="text-xl font-semibold text-orange-600">Mike Mattesi with 25 years of experience</p>
+          <p className="text-gray-600 mt-2 font-semibold text-justify">
+            Experienced in animation, video games, advertising, education and IP development. My focus now is on art and creativity, helping teams to find premium and creative visual concepts.
+            He has worked with clients such as Pixar, Walt Disney Feature Animation, Marvel Comics, Hasbro Toys, among others.
+          </p>
         </div>
       </div>
 
+
+
+      <div className="mt-6 flex justify-center space-x-6">
+        <img
+          src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjC2j3BMo2jOb8lkl_mqeu_dB55KPfpVzLLcVyBDilO4vUp59S4JoFRGXrkMPLAyi1KExZjmqU4-DL8NPryichO1lKQv-uucMwDAQIrVHP1xFuOREg6XvkUtGlFCtKXV6eJ_DJwzgnD7io/s320/F001-028.tif"
+          alt="Additional 1"
+          className="w-48 h-auto"
+        />
+
+        <img
+          src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjF-q9BlZ1OsSGmn_sERhs80JegeVeo-LuOGY2ZniJ4YittMeoMzU-MpA2D8PKOJ3b-SBefwPms6N8vvWFGcuFCaQ5LgjVeXPouq8GJdYFgfPfXcXY1DAEAej0KuR-it8B99aoRGMB7fQI/s1600/F001-041.tif"
+          alt="Additional 2"
+          className="w-48 h-auto"
+        />
+
+        <img
+          src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg0tQ_tg6mPXLVf-JVedfR5ak_ig3EuXc0-BlsywGiEbbWphs4BptiqMRf9b549rUDrVY9UglazqdrC9JsMjjz_SPKoipa3kAeImWezZRRK9eDxLuCja4_wtXW_5xTTigjF7mF6zqaiRlY/s1600/F001-033.tif"
+          alt="Additional 2"
+          className="w-48 h-auto"
+        />
+      </div>
+      
+      <div className="mt-12 bg-white p-6 rounded-lg flex items-center space-x-6">
+        <div className="flex-1">
+          <p className="text-xl font-semibold text-orange-600">Glen Keane </p>
+          <p className="text-gray-600 mt-2 font-semibold text-justify">
+            Glen Keane Productions is a creative home for artists to pursue projects that are inherently good, beautiful, and true. We strive to push the boundaries of storytelling through visionary artistry and encourage diverse voices and talent in animation.
+            <br /><br />
+            Our directors and producers have lent their skills to a variety of films in different mediums, including Paperman, June, Duet, Age of Sail, and Dear Basketball. And, more recently, the animated preschool series Trash Truck, which was nominated for a Daytime Emmy Award, and the Academy Award-nominated animated feature Over the Moon.
+          </p>
+        </div>
+
+        <img
+          src="https://blog.siggraph.org/wp-content/uploads/2020/11/SA20-Keynote.jpg"
+          alt="Glen Keane Productions"
+          className="w-48 h-48 object-cover rounded-md"
+        />
+      </div>
+
+
+
       {/* Footer */}
-      <div className="bg-gray-800 text-white py-4">
+      <div className="bg-gray-800 text-white py-8">
         <div className="max-w-screen-xl mx-auto text-center">
           <div className="md:flex md:justify-between">
             <div className="mb-6 md:mb-0">
