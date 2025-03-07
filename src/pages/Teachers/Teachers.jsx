@@ -7,9 +7,8 @@ function Teachers() {
   const [error, setError] = useState(null); 
 
   useEffect(() => {
-    
-    axios.get(`${import.meta.env.VITE_SERVER_URL}/teachers`) 
-      .then(response => {
+    axios.get(`${process.env.REACT_APP_SERVER_URL}/teachers`) 
+       .then(response => {
         setTeachers(response.data); 
         setLoading(false); 
       })
@@ -52,11 +51,15 @@ function Teachers() {
               </a>
               <div className="mt-4">
                 <h4 className="font-semibold">Cursos:</h4>
-                <ul className="list-disc pl-5">
-                  {teacher.courses.map((course, index) => (
-                    <li key={course._id}>Curso {course["0"]}</li>
-                  ))}
-                </ul>
+                {teacher.courses && teacher.courses.length > 0 ? (
+                  <ul className="list-disc pl-5">
+                    {teacher.courses.map((course, index) => (
+                      <li key={course._id}>Curso {course["0"]}</li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p>No hay cursos disponibles</p>
+                )}
               </div>
             </div>
           </div>
@@ -67,3 +70,4 @@ function Teachers() {
 }
 
 export default Teachers;
+
