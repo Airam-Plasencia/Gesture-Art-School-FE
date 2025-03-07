@@ -18,7 +18,7 @@ function AboutPage() {
                         Airam contributed his skills as a professional artist over five years on numerous award-winning projects in varied capacities in animated film, tv series, and anime. He collaborated with Anima Kitchent, Six Point Harness and Tulipop.
                     </p>
                     <p className="text-lg leading-relaxed text-orange-900 text-justify mb-6">
-                        Simultaneously, Airam Plasencia has authored four Art books, published in numerous languages, utilized around the world to inspire and educate artists on the concept of Character Design. He has instructed FORCE Drawing for over five years and inspired thousands of artists.
+                    Simultaneously, the idea of this project came to me a desire to go to Pasadena, California to study in an art school, then I thought of making my own school linked to that goal. This way I would have the subjects and teachers that I would like to have.
                     </p>
                     <p className="text-lg leading-relaxed text-orange-900 text-justify mb-8">
                         Contact him at:
