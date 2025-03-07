@@ -91,25 +91,56 @@ function Teachers() {
           className="w-48 h-auto"
         />
       </div>
-      
-      <div className="mt-12 bg-white p-6 rounded-lg flex items-center space-x-6">
-        <div className="flex-1">
-          <p className="text-xl font-semibold text-orange-600">Glen Keane </p>
-          <p className="text-gray-600 mt-2 font-semibold text-justify">
-            Glen Keane Productions is a creative home for artists to pursue projects that are inherently good, beautiful, and true. We strive to push the boundaries of storytelling through visionary artistry and encourage diverse voices and talent in animation.
-            <br /><br />
-            Our directors and producers have lent their skills to a variety of films in different mediums, including Paperman, June, Duet, Age of Sail, and Dear Basketball. And, more recently, the animated preschool series Trash Truck, which was nominated for a Daytime Emmy Award, and the Academy Award-nominated animated feature Over the Moon.
-          </p>
-        </div>
 
-        <img
-          src="https://blog.siggraph.org/wp-content/uploads/2020/11/SA20-Keynote.jpg"
-          alt="Glen Keane Productions"
-          className="w-48 h-48 object-cover rounded-md"
-        />
+      <div className="mt-12 bg-gray-800 p-6 ">
+        <div className="flex items-center space-x-6">
+          <div className="flex-1">
+            <p className="text-xl font-semibold text-orange-500">Glen Keane</p>
+            <p className="text-white mt-2 font-semibold text-justify">
+              Glen Keane Productions is a creative home for artists to pursue projects that are inherently good, beautiful, and true. We strive to push the boundaries of storytelling through visionary artistry and encourage diverse voices and talent in animation.
+              <br /><br />
+              Our directors and producers have lent their skills to a variety of films in different mediums, including Paperman, June, Duet, Age of Sail, and Dear Basketball. And, more recently, the animated preschool series Trash Truck, which was nominated for a Daytime Emmy Award, and the Academy Award-nominated animated feature Over the Moon.
+            </p>
+          </div>
+          <img
+            src="https://www.waltdisney.org/sites/default/files/styles/large/public/2020-11/Keane%20Headshot.jpg?itok=CSuhj9Mw"
+            alt="Glen Keane Productions"
+            className="w-48 h-48 object-cover rounded-md"
+          />
+        </div>
+        <div className="mt-6 flex justify-center space-x-6">
+          <img
+            src="https://images.squarespace-cdn.com/content/v1/5edc0fca707a742b6f9cae65/1599591123715-SAJ21S3OBVADN9GC6K76/sketch-duet.jpg?format=1500w"
+            alt="Additional 1"
+            className="w-2/5 h-auto"
+          />
+        </div>
       </div>
 
+      <div className="mt-12 bg-white p-6 rounded-lg flex items-center space-x-6">
+        <img
+          src="https://drawingamerica.com/wp-content/uploads/2019/10/Screen-Shot-2019-10-14-at-11.50.54-AM-e1578678414492-300x194.png"
+          alt="Experience"
+          className="w-48 h-48 object-cover rounded-md"
+        />
 
+        <div className="flex-1">
+          <p className="text-xl font-semibold text-orange-600">Will Weston</p>
+          <p className="text-gray-600 mt-2 font-semibold text-justify">
+            Before teaching, I was an entertainment artist in feature and television animation. After finishing Disney’s great program I worked in their feature division and eventually at Nickelodeon, Warner Brothers, and Sony Feature Animation. Before animation I was an advertising and editorial illustrator. I worked through agents in New York, Chicago and Los Angeles.
+            <br /><br />
+            The best way to see what I do is by visiting my Instagram page at: @WillWestonStudio
+          </p>
+        </div>
+      </div>
+
+      <div className="mt-6 flex justify-center space-x-6">
+        <img
+          src="https://beauxartsentertainment.com/wp-content/uploads/2022/12/B-AE_Fi_WillWeston_Props-Lanscape_Event_2023.jpeg"
+          alt="Additional 1"
+          className="w-4/5 h-auto m-5"
+        />   
+      </div>
 
       {/* Footer */}
       <div className="bg-gray-800 text-white py-8">
