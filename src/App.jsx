@@ -8,6 +8,7 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import Gallery from './pages/Gallery/Gallery';
 import About from './pages/AboutPage/AboutPage';
 import Teachers from './pages/Teachers/Teachers';
+import Courses from './pages/Courses/Courses';
 import TeacherDetail from './pages/TeacherDetail/TeacherDetail';
 import './index.css';
 
@@ -25,6 +26,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/teachers" element={<Teachers />} />
+        <Route path="/courses" element={<Courses />} />
         <Route path="/teachers/:teacherId" element={<TeacherDetail />} />
         <Route path="/about" element={<About />} />
         <Route

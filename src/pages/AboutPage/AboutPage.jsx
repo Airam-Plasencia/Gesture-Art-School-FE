@@ -31,7 +31,7 @@ function AboutPage() {
                     <div className="text-lg leading-relaxed text-orange-900 text-justify">
                         <p className="mb-4">Website: <a href="http://Gesture-Art-School.com" className="text-blue-600 hover:underline">Gesture-Art-School.com</a></p>
                         <p className="mb-4">Facebook: <a href="https://www.facebook.com/gesture-Art-School" className="text-blue-600 hover:underline">Gesture-Art-School with Airam Plasencia</a></p>
-                        <p className="mb-4">Instagram: <a href="https://www.instagram.com/gesture-Art-School" className="text-blue-600 hover:underline">michaelmattesi</a></p>
+                        <p className="mb-4">Instagram: <a href="https://www.instagram.com/gesture-Art-School" className="text-blue-600 hover:underline">gesture-artschool</a></p>
                         <p className="mb-4">Email: <a href="mailto:aira@gestureart.com" className="text-blue-600 hover:underline">aira@gestureart.com</a></p>
                     </div>
                 </div>
