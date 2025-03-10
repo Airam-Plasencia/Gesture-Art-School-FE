@@ -21,14 +21,23 @@ function LoginPage() {
     authService
       .login(requestBody)
       .then((response) => {
-       
-        storeToken(response.data.authToken);
-        authenticateUser();
-        navigate("/"); 
+        
+        if (response && response.data) {
+          
+          storeToken(response.data.authToken);  
+          localStorage.setItem("userId", response.data.userId);  
+
+        
+          authenticateUser();
+          navigate("/"); 
+        } else {
+          
+          setErrorMessage("Invalid response format from server");
+        }
       })
       .catch((error) => {
         
-        const errorDescription = error.response.data.message;
+        const errorDescription = error.response ? error.response.data.message : error.message;
         setErrorMessage(errorDescription);
       });
   };
@@ -97,3 +106,5 @@ function LoginPage() {
 }
 
 export default LoginPage;
+
+
