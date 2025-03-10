@@ -6,7 +6,7 @@ function ProfilePage() {
   const [addedCourses, setAddedCourses] = useState([]);
   const [error, setError] = useState(null);
   const { user } = useContext(AuthContext); 
-  const userId = user ? user._id : null; 
+  const userId = user ? user._id : null;
 
   useEffect(() => {
     if (!userId) {
@@ -35,18 +35,37 @@ function ProfilePage() {
       });
   }, [userId]);
 
-  // Función para remover un curso de la vista
+  // Función para eliminar curso de la vista (no de la base de datos)
   const removeCourseFromView = (courseId) => {
-    // Actualizamos el estado eliminando el curso de la lista localmente
-    setAddedCourses(addedCourses.filter(course => course._id !== courseId));
+    setAddedCourses((prevCourses) =>
+      prevCourses.filter((course) => course._id !== courseId)
+    );
   };
 
   return (
     <div className="container mx-auto p-6">
-      <h1 className="text-3xl font-semibold text-center text-blue-500 mb-8">Your Profile</h1>
-      
-      {error && <div className="text-red-500 text-center mb-4">{error}</div>}
+      {/* Tooltip and Profile Title */}
+      <div className="relative">
+          <div
+            id="tooltip-bonnie"
+            role="tooltip"
+            className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700"
+          >
+            Bonnie Green
+            <div className="tooltip-arrow" data-popper-arrow></div>
+          </div>
+          {/* Avatar Image from external URL */}
+          <img
+            data-tooltip-target="tooltip-bonnie"
+            className="w-44 h-44 rounded-full inline-block ml-3" // Cambié `rounded-sm` por `rounded-full`
+            src="https://w0.peakpx.com/wallpaper/685/815/HD-wallpaper-artstation-women-portrait-display-digital-painting-eyelashes-black-background-fan-art-digital-art-artwork-lea-bichlmaier-profile.jpg"
+            alt="Profile Avatar"
+          />
+        
+      </div>
 
+      {error && <div className="text-red-500 text-center mb-4">{error}</div>}
+      <br></br>
       <h2 className="text-xl font-semibold text-orange-500">Your Added Courses:</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
@@ -55,7 +74,6 @@ function ProfilePage() {
         ) : (
           addedCourses.map((course) => (
             <div key={course._id} className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-all">
-              {/* Mostrar la imagen del curso */}
               {course.image && (
                 <img
                   src={course.image}
@@ -63,7 +81,6 @@ function ProfilePage() {
                   className="w-full h-48 object-cover rounded-md mb-4"
                 />
               )}
-
               <h2 className="text-2xl font-semibold text-orange-500">{course.courseName}</h2>
               <p className="text-gray-600 font-semibold mt-2">{course.courseDescription}</p>
               <div className="mt-4">
@@ -72,10 +89,11 @@ function ProfilePage() {
                 <p className="text-gray-500">Materials: {course.requiredMaterials}</p>
               </div>
 
-              {/* Botón de eliminar curso de la vista (sin eliminarlo de la base de datos) */}
+              <br></br>
               <button
+                type="button"
                 onClick={() => removeCourseFromView(course._id)}
-                className="mt-4 inline-flex items-center justify-center p-2 text-sm font-medium text-red-900 rounded-lg bg-red-100 hover:bg-red-200 focus:ring-4 focus:outline-none focus:ring-red-300"
+                className="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
               >
                 Remove Course
               </button>
@@ -88,6 +106,10 @@ function ProfilePage() {
 }
 
 export default ProfilePage;
+
+
+
+
 
 
 
