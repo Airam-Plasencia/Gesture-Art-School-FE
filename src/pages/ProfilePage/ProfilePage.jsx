@@ -5,7 +5,7 @@ function ProfilePage() {
   const [addedCourses, setAddedCourses] = useState([]);
 
   useEffect(() => {
-    // Recuperamos los cursos añadidos desde el localStorage
+    
     const storedCourses = JSON.parse(localStorage.getItem('addedCourses'));
     if (storedCourses) {
       setAddedCourses(storedCourses);
