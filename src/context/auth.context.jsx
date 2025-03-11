@@ -17,22 +17,22 @@ function AuthProviderWrapper(props) {
 
     if (storedToken) {
       authService
-        .verify() // Aquí debes verificar el token con tu API
+        .verify() // Aquí verificamos el token con el backend
         .then((response) => {
           const user = response.data;
           setIsLoggedIn(true);
           setIsLoading(false);
-          setUser(user);  // Actualizar usuario
+          setUser(user);  // Actualiza el usuario
         })
         .catch((error) => {
           setIsLoggedIn(false);
           setIsLoading(false);
-          setUser(null);
+          setUser(null);  // Si el token es inválido o no existe, limpiamos el usuario
         });
     } else {
       setIsLoggedIn(false);
       setIsLoading(false);
-      setUser(null);
+      setUser(null);  // Si no hay token, también limpiamos el usuario
     }
   };
 
@@ -43,7 +43,7 @@ function AuthProviderWrapper(props) {
   };
 
   useEffect(() => {
-    authenticateUser();
+    authenticateUser();  // Llama a authenticateUser al montar el componente
   }, []);
 
   return (
@@ -64,6 +64,7 @@ function AuthProviderWrapper(props) {
 }
 
 export { AuthProviderWrapper, AuthContext };
+
 
 
 
