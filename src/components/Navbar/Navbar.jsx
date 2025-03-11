@@ -4,7 +4,7 @@ import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../context/auth.context";
 
 function Navbar() {
-  const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
+  const { isLoggedIn, user, logOutUser } = useContext(AuthContext);  // Obtenemos logOutUser desde el contexto
   const location = useLocation();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false); // Estado para verificar si el usuario es Admin
@@ -23,8 +23,8 @@ function Navbar() {
   };
 
   const handleLogout = () => {
-    logOutUser();
-    setIsDropdownOpen(false);
+    logOutUser();  // Llama a logOutUser para cerrar sesión
+    setIsDropdownOpen(false);  // Cierra el dropdown
   };
 
   return (

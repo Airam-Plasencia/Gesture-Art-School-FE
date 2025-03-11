@@ -31,7 +31,6 @@ function App() {
         <Route path="/teachers/:teacherId" element={<TeacherDetail />} />
         <Route path="/about" element={<About />} />
         
-       
         <Route
           path="/profile"
           element={
@@ -40,7 +39,6 @@ function App() {
             </IsPrivate>
           }
         />
-        
         
         <Route
           path="/signup"
@@ -58,8 +56,7 @@ function App() {
             </IsAnon>
           }
         />
-        
-        
+
         <Route
           path="/create-course"
           element={
@@ -74,3 +71,4 @@ function App() {
 }
 
 export default App;
+

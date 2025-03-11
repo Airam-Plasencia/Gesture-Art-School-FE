@@ -1,22 +1,24 @@
-import { useContext } from "react";
-import { AuthContext } from "../../context/auth.context";
-import { Navigate } from "react-router-dom";
-import Loading from "../Loading/Loading";
+import React, { useContext } from 'react';
+import { AuthContext } from '../../context/auth.context';
+import { Navigate } from 'react-router-dom';
 
-function IsPrivate({ children }) {
-  const { isLoggedIn, isLoading } = useContext(AuthContext);
+const IsPrivate = ({ children }) => {
+  const { isLoggedIn, user } = useContext(AuthContext);
 
-  // If the authentication is still loading ⏳
-  if (isLoading) {
-    return <Loading />;
-  }
-
+  // Si el usuario no está logueado, redirige a la página de login
   if (!isLoggedIn) {
-    // If the user is not logged in navigate to the login page ❌
     return <Navigate to="/login" />;
   }
-  // If the user is logged in, allow to see the page ✅
+
+  // Si el usuario está logueado pero no es admin, redirige a la página de cursos
+  if (user && user.role !== 'admin') {
+    return <Navigate to="/courses" />;
+  }
+
+  // Si el usuario está logueado y tiene rol de admin, permite el acceso a la página
   return children;
-}
+};
 
 export default IsPrivate;
+
+

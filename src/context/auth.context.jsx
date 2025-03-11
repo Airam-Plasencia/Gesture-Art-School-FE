@@ -6,66 +6,43 @@ const AuthContext = React.createContext();
 function AuthProviderWrapper(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null);  // Agregar setUser al contexto
 
   const storeToken = (token) => {
     localStorage.setItem("authToken", token);
   };
 
   const authenticateUser = () => {
-    // Get the stored token from the localStorage
     const storedToken = localStorage.getItem("authToken");
 
-    // If the token exists in the localStorage
     if (storedToken) {
-      // Send a request to the server using axios
-      /* 
-        axios.get(
-          `${process.env.REACT_APP_SERVER_URL}/auth/verify`,
-          { headers: { Authorization: `Bearer ${storedToken}` } }
-        )
-        .then((response) => {})
-        */
-
-      // Or using a service
       authService
-        .verify()
+        .verify() // Aquí debes verificar el token con tu API
         .then((response) => {
-          // If the server verifies that JWT token is valid  ✅
           const user = response.data;
-          // Update state variables
           setIsLoggedIn(true);
           setIsLoading(false);
-          setUser(user);
+          setUser(user);  // Actualizar usuario
         })
         .catch((error) => {
-          // If the server sends an error response (invalid token) ❌
-          // Update state variables
           setIsLoggedIn(false);
           setIsLoading(false);
           setUser(null);
         });
     } else {
-      // If the token is not available
       setIsLoggedIn(false);
       setIsLoading(false);
       setUser(null);
     }
   };
 
-  const removeToken = () => {
-    localStorage.removeItem("authToken");
-  };
-
   const logOutUser = () => {
-    // Upon logout, remove the token from the localStorage
-    removeToken();
-    authenticateUser();
+    localStorage.removeItem("authToken");  // Elimina el token de localStorage
+    setIsLoggedIn(false);  // Resetea el estado de autenticación
+    setUser(null);  // Limpia el usuario
   };
 
   useEffect(() => {
-    // Run this code once the AuthProviderWrapper component in the App loads for the first time.
-    // This effect runs when the application and the AuthProviderWrapper component load for the first time.
     authenticateUser();
   }, []);
 
@@ -75,9 +52,10 @@ function AuthProviderWrapper(props) {
         isLoggedIn,
         isLoading,
         user,
+        setUser,  // Asegúrate de incluir setUser en el contexto
         storeToken,
         authenticateUser,
-        logOutUser,
+        logOutUser,  // Proveer la función logOutUser
       }}
     >
       {props.children}
@@ -86,3 +64,8 @@ function AuthProviderWrapper(props) {
 }
 
 export { AuthProviderWrapper, AuthContext };
+
+
+
+
+

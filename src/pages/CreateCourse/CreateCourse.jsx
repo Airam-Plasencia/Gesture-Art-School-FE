@@ -9,7 +9,7 @@ function CreateCourseForm({ setCourses }) {
     duration: "",
     level: "",
     materials: "",
-    image: "",
+    image: "", // Aquí almacenamos la URL de la imagen
   });
 
   const handleInputChange = (e) => {
@@ -20,47 +20,51 @@ function CreateCourseForm({ setCourses }) {
     });
   };
 
-  const handleImageChange = (e) => {
-    setCourseData({
-      ...courseData,
-      image: e.target.files[0],
-    });
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const formData = new FormData();
-    formData.append("title", courseData.title);
-    formData.append("description", courseData.description);
-    formData.append("teacher", courseData.teacher);
-    formData.append("duration", courseData.duration);
-    formData.append("level", courseData.level);
-    formData.append("materials", courseData.materials);
-    formData.append("image", courseData.image);
+    // Crear un objeto con los datos del curso
+    const courseDataToSend = {
+      courseName: courseData.title,
+      courseDescription: courseData.description,
+      courseLevel: courseData.level,
+      courseDuration: courseData.duration,
+      requiredMaterials: courseData.materials,
+      instructor: courseData.teacher, // Suponiendo que el "teacher" es el ID del instructor
+      image: courseData.image, // URL de la imagen
+    };
 
+    // Enviar los datos como JSON
     axios
-      .post(`${process.env.REACT_APP_SERVER_URL}/courses`, formData)
+      .post(`${process.env.REACT_APP_SERVER_URL}/admin/courses`, courseDataToSend)
       .then((response) => {
         console.log("Curso creado con éxito:", response.data);
         setCourses((prevCourses) => [response.data, ...prevCourses]); // Añadimos el curso al estado
       })
       .catch((err) => {
         console.error("Error al crear el curso:", err.response ? err.response.data : err.message);
+        alert(`Error al crear el curso: ${err.response?.data?.message || "Error desconocido"}`);
       });
   };
 
   return (
-    <div
-      className="h-screen bg-cover bg-no-repeat bg-right"
-      style={{
-        backgroundImage: `url("https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/themes/940417/settings_images/f2181a6-f533-0dea-db6d-55df5d62b4a_IMG_0461.JPG")`,
-      }}
-    >
-      <div className="bg-white bg-opacity-80 h-full flex justify-center items-center">
-        
-        <form onSubmit={handleSubmit} className="max-w-sm mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
-          <h2 className="text-2xl font-semibold text-center mb-6">Create a New Course</h2>
+    <div className="h-screen flex">
+      {/* Contenedor de imagen de fondo a la izquierda */}
+      <div
+        className="w-1/2 bg-cover bg-no-repeat bg-left"
+        style={{
+          backgroundImage: `url("https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/themes/940417/settings_images/f2181a6-f533-0dea-db6d-55df5d62b4a_IMG_0461.JPG")`,
+        }}
+      />
+      {/* Contenedor para el formulario */}
+      <div className="flex-1 bg-white bg-opacity-80 flex justify-center items-center">
+        <form
+          onSubmit={handleSubmit}
+          className="max-w-sm mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg"
+        >
+          <h2 className="text-2xl font-semibold text-center text-orange-500 mb-6">
+            Create a New Course
+          </h2>
 
           {/* Course Title */}
           <div className="mb-5">
@@ -167,14 +171,16 @@ function CreateCourseForm({ setCourses }) {
           {/* Course Image */}
           <div className="mb-5">
             <label htmlFor="image" className="block mb-2 text-sm font-medium text-gray-900">
-              Course Image
+              Course Image (URL)
             </label>
             <input
-              type="file"
+              type="text"
               id="image"
               name="image"
-              onChange={handleImageChange}
+              value={courseData.image}
+              onChange={handleInputChange}
               className="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              placeholder="Enter image URL"
               required
             />
           </div>
@@ -193,6 +199,7 @@ function CreateCourseForm({ setCourses }) {
 }
 
 export default CreateCourseForm;
+
 
 
 

@@ -8,8 +8,7 @@ function Courses() {
   const [error, setError] = useState(null);
 
   // Extraer userId y los cursos desde el contexto
-  const { user, setUser } = useContext(AuthContext);
-
+  const { user, setUser } = useContext(AuthContext);  // Ahora tienes acceso a setUser
   const userId = user ? user._id : null;
 
   useEffect(() => {
@@ -51,9 +50,9 @@ function Courses() {
       )
       .then((response) => {
         console.log("Curso agregado correctamente:", response.data);
-        const updatedUser = response.data.user;
-        setUser(updatedUser);
-        setCourses(updatedUser.courses);
+        const updatedUser = response.data.user;  // Usuario actualizado
+        setUser(updatedUser);  // Actualizamos el usuario en el contexto
+        setCourses(updatedUser.courses);  // Actualizamos los cursos del usuario
       })
       .catch((err) => {
         console.error("Error al añadir curso:", err.response ? err.response.data : err.message);
@@ -71,8 +70,11 @@ function Courses() {
       {error && <div className="text-red-500 text-center mb-4">{error}</div>}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {courses.map((course) => (
-          <div key={course._id} className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-all flex">
+        {courses.map((course, index) => (
+          <div 
+            key={course._id || index}  // Utiliza _id como key, y si no existe, usa el índice
+            className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-all flex"
+          >
             <img
               src={course.image}
               alt={course.courseName}
@@ -104,6 +106,9 @@ function Courses() {
 }
 
 export default Courses;
+
+
+
 
 
 
