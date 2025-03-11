@@ -1,12 +1,20 @@
 import "./Navbar.css";
 import { Link, useLocation } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../context/auth.context";
 
 function Navbar() {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
   const location = useLocation();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false); // Estado para verificar si el usuario es Admin
+
+  // Verificamos si el usuario tiene el rol de 'admin'
+  useEffect(() => {
+    if (user && user.role === 'admin') {
+      setIsAdmin(true);
+    }
+  }, [user]);
 
   const isLoginOrSignupPage = location.pathname === "/login" || location.pathname === "/signup";
 
@@ -50,6 +58,13 @@ function Navbar() {
             Gallery
           </Link>
 
+          {/* Crear Curso (solo visible para Admin) */}
+          {isAdmin && (
+            <Link to="/create-course" className="text-gray hover:text-orange-500 mt-2">
+              Create Course
+            </Link>
+          )}
+
           {/* Imagen de perfil y Dropdown */}
           <div className="flex items-center space-x-4 ml-0 mt-2 relative">
             {isLoggedIn ? (
@@ -62,7 +77,6 @@ function Navbar() {
                   alt="Profile Avatar"
                 />
 
-                
                 {isDropdownOpen && (
                   <div className="z-10 absolute bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700 dark:divide-gray-600 mt-52 left-[-5px]">
                     <div className="px-4 py-3 text-sm text-gray-900 dark:text-white">
@@ -107,6 +121,7 @@ function Navbar() {
 }
 
 export default Navbar;
+
 
 
 

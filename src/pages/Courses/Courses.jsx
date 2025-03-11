@@ -41,7 +41,7 @@ function Courses() {
 
     axios
       .post(
-        `${process.env.REACT_APP_SERVER_URL}/users/${userId}/courses`, // Usar el userId desde el contexto
+        `${process.env.REACT_APP_SERVER_URL}/users/${userId}/courses`, 
         { courseId },
         {
           headers: {
@@ -52,10 +52,8 @@ function Courses() {
       .then((response) => {
         console.log("Curso agregado correctamente:", response.data);
         const updatedUser = response.data.user;
-
-        // Actualiza el estado de usuario con los cursos actualizados
-        setUser(updatedUser);  // Actualiza el contexto del usuario con los cursos nuevos
-        setCourses(updatedUser.courses);  // Actualiza los cursos en el componente Courses
+        setUser(updatedUser);
+        setCourses(updatedUser.courses);
       })
       .catch((err) => {
         console.error("Error al añadir curso:", err.response ? err.response.data : err.message);
@@ -71,6 +69,7 @@ function Courses() {
     <div className="container mx-auto p-6">
       <h1 className="text-3xl font-semibold text-center text-blue-500 mb-8">Available Courses</h1>
       {error && <div className="text-red-500 text-center mb-4">{error}</div>}
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {courses.map((course) => (
           <div key={course._id} className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-all flex">
@@ -105,6 +104,7 @@ function Courses() {
 }
 
 export default Courses;
+
 
 
 

@@ -10,6 +10,7 @@ import About from './pages/AboutPage/AboutPage';
 import Teachers from './pages/Teachers/Teachers';
 import Courses from './pages/Courses/Courses';
 import TeacherDetail from './pages/TeacherDetail/TeacherDetail';
+import CreateCourse from './pages/CreateCourse/CreateCourse';  
 import './index.css';
 
 import Navbar from "./components/Navbar/Navbar";
@@ -29,6 +30,8 @@ function App() {
         <Route path="/courses" element={<Courses />} />
         <Route path="/teachers/:teacherId" element={<TeacherDetail />} />
         <Route path="/about" element={<About />} />
+        
+       
         <Route
           path="/profile"
           element={
@@ -37,7 +40,8 @@ function App() {
             </IsPrivate>
           }
         />
-
+        
+        
         <Route
           path="/signup"
           element={
@@ -55,6 +59,15 @@ function App() {
           }
         />
         
+        
+        <Route
+          path="/create-course"
+          element={
+            <IsPrivate>
+              <CreateCourse />
+            </IsPrivate>
+          }
+        />
       </Routes>
     </div>
   );
