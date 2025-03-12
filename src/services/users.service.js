@@ -1,6 +1,6 @@
 import axios from "axios";
 
-class AuthService {
+class UsersService {
   constructor() {
     this.api = axios.create({
       baseURL: process.env.REACT_APP_SERVER_URL || "http://localhost:5005",
@@ -20,8 +20,8 @@ class AuthService {
   }
 
 
-  login = (requestBody) => {
-    return this.api.post("/auth/login", requestBody);
+  getUsers = (userId) => {
+    return this.api.get(`${process.env.REACT_APP_SERVER_URL}/users/${userId}`);
     // same as
     // return axios.post("http://localhost:5005/auth/login");
   };
@@ -40,6 +40,6 @@ class AuthService {
 }
 
 // Create one instance (object) of the service
-const authService = new AuthService();
+const userService = new UsersService();
 
-export default authService;
+export default userService;

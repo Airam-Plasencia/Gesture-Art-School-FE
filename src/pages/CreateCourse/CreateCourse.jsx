@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-function CreateCourseForm({ setCourses }) {
+function CreateCourseForm() {
   const [courseData, setCourseData] = useState({
     title: "",
     description: "",
@@ -11,7 +12,7 @@ function CreateCourseForm({ setCourses }) {
     materials: "",
     image: "", // Aquí almacenamos la URL de la imagen
   });
-
+  const navigate = useNavigate();
   const [teachers, setTeachers] = useState([]); // Estado para almacenar los instructores
 
   useEffect(() => {
@@ -64,7 +65,7 @@ function CreateCourseForm({ setCourses }) {
       })
       .then((response) => {
         console.log("Curso creado con éxito:", response.data);
-        setCourses((prevCourses) => [response.data, ...prevCourses]); // Añadir el nuevo curso
+        navigate("/courses"); // Añadir el nuevo curso
       })
       .catch((err) => {
         console.error("Error al crear el curso:", err.response ? err.response.data : err.message);
