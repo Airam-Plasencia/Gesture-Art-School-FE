@@ -28,7 +28,7 @@ function Navbar() {
   };
 
   return (
-    <nav className={`p-4 ${isLoginOrSignupPage ? 'hidden' : ''}`}>
+    <nav className={`p-3 pt-0 -mt-4 ${isLoginOrSignupPage ? 'hidden' : ''}`}>
       <div className="flex items-center justify-between">
         {/* Logo y título */}
         <div className="flex items-center">
@@ -41,44 +41,44 @@ function Navbar() {
         </div>
 
         {/* Menú de navegación */}
-        <div className="flex space-x-6 ml-0 mt-8 mr-20">
+        <div className="flex items-center space-x-6 ml-0 mr-12">
           <Link to="/">
-            <button className="text-gray hover:text-orange-500 mt-2">Home</button>
+            <button className="text-gray hover:text-orange-500">Home</button>
           </Link>
-          <Link to="/courses" className="text-gray hover:text-orange-500 mt-2">
+          <Link to="/courses" className="text-gray hover:text-orange-500">
             Courses
           </Link>
-          <Link to="/teachers" className="text-gray hover:text-orange-500 mt-2">
+          <Link to="/teachers" className="text-gray hover:text-orange-500">
             Teachers
           </Link>
-          <Link to="/about" className="text-gray hover:text-orange-500 mt-2">
+          <Link to="/about" className="text-gray hover:text-orange-500">
             About
           </Link>
-          <Link to="/gallery" className="text-gray hover:text-orange-500 mt-2">
+          <Link to="/gallery" className="text-gray hover:text-orange-500">
             Gallery
           </Link>
 
           {/* Crear Curso (solo visible para Admin) */}
           {isAdmin && (
-            <Link to="/create-course" className="text-gray hover:text-orange-500 mt-2">
+            <Link to="/create-course" className="text-gray hover:text-orange-500">
               Create Course
             </Link>
           )}
 
           {/* Imagen de perfil y Dropdown */}
-          <div className="flex items-center space-x-4 ml-0 mt-2 relative">
+          <div className="flex items-center space-x-4 ml-0 relative">
             {isLoggedIn ? (
               <>
                 {/* Imagen de perfil */}
                 <img
                   onClick={toggleDropdown}
-                  className="w-12 h-12 rounded-full cursor-pointer mb-1"
+                  className="w-12 h-12 rounded-full cursor-pointer"
                   src={user.profileImage || "https://w0.peakpx.com/wallpaper/685/815/HD-wallpaper-artstation-women-portrait-display-digital-painting-eyelashes-black-background-fan-art-digital-art-artwork-lea-bichlmaier-profile.jpg"}
                   alt="Profile Avatar"
                 />
 
                 {isDropdownOpen && (
-                  <div className="z-10 absolute bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700 dark:divide-gray-600 mt-52 left-[-5px]">
+                  <div className="z-10 absolute bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700 dark:divide-gray-600 top-16 left-[-84px]">
                     <div className="px-4 py-3 text-sm text-gray-900 dark:text-white">
                       <div>{user.name}</div>
                       <div className="font-medium truncate">{user.email}</div>
@@ -86,7 +86,7 @@ function Navbar() {
                     <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
                       <li>
                         <Link to="/profile">
-                          <button className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                          <button className="block w-full px-4 py-2 text-center hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                             Profile
                           </button>
                         </Link>
@@ -94,7 +94,7 @@ function Navbar() {
                       <li>
                         <button
                           onClick={handleLogout}
-                          className="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                          className="block w-full px-4 py-2 text-sm text-center text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                         >
                           Logout
                         </button>
@@ -106,10 +106,10 @@ function Navbar() {
             ) : (
               <>
                 <Link to="/signup">
-                  <button className="text-gray hover:text-orange-500 mb-2">Sign Up</button>
+                  <button className="text-gray hover:text-orange-500">Sign Up</button>
                 </Link>
                 <Link to="/login">
-                  <button className="text-gray hover:text-orange-500 mb-2">Login</button>
+                  <button className="text-gray hover:text-orange-500">Login</button>
                 </Link>
               </>
             )}

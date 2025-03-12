@@ -72,13 +72,16 @@ function ProfilePage() {
   return (
     <div className="container mx-auto p-6">
       <div className="flex justify-center items-center mb-8">
+        {/* Imagen de perfil con más tamaño */}
         <img
-          src={userProfile.profileImage || "default-avatar.jpg"}
-          alt="Profile"
-          className="w-32 h-32 rounded-full object-cover"
+           
+          src={user.profileImage || "https://w0.peakpx.com/wallpaper/685/815/HD-wallpaper-artstation-women-portrait-display-digital-painting-eyelashes-black-background-fan-art-digital-art-artwork-lea-bichlmaier-profile.jpg"}
+          alt="Profile Avatar"
+          className="w-48 h-48 rounded-full object-cover cursor-pointer" 
         />
       </div>
-      <h1 className="text-3xl font-semibold text-center mb-8">My Courses</h1>
+
+      <h1 className="text-3xl font-semibold text-center text-orange-500 mb-8">My Courses</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {userProfile?.courses.length === 0 ? (
