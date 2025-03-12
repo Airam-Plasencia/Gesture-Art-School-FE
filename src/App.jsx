@@ -16,6 +16,7 @@ import './index.css';
 import Navbar from "./components/Navbar/Navbar";
 import IsPrivate from "./components/IsPrivate/IsPrivate";
 import IsAnon from "./components/IsAnon/IsAnon";
+import EditCourseForm from "./components/EditCourse/EditCourseForm";
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
         <Route path="/courses" element={<Courses />} />
         <Route path="/teachers/:teacherId" element={<TeacherDetail />} />
         <Route path="/about" element={<About />} />
+        <Route path="/edit-course/:courseId" element={<EditCourseForm />} />
         
         <Route
           path="/profile"

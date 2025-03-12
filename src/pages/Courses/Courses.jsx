@@ -65,19 +65,26 @@ function Courses() {
   const deleteCourse = async (courseId) => {
     try {
       const token = localStorage.getItem("authToken");
-
-      const response = await axios.delete(`http://localhost:5000/admin/courses/${courseId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
+  
+      const response = await axios.delete(
+        `${process.env.REACT_APP_SERVER_URL}/admin/courses/${courseId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+  
       console.log("Curso eliminado:", response.data);
+  
+      // Actualiza la lista de cursos eliminando el curso de la lista
+      setCourses((prevCourses) => prevCourses.filter(course => course._id !== courseId));
     } catch (error) {
       console.error("Error al eliminar el curso:", error);
       alert("No se pudo eliminar el curso.");
     }
   };
+  
 
   // Si está cargando los cursos
   if (loading) {

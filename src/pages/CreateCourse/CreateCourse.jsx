@@ -1,16 +1,30 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 function CreateCourseForm({ setCourses }) {
   const [courseData, setCourseData] = useState({
     title: "",
     description: "",
-    teacher: "",
+    teacher: "", // Aquí guardaremos el ID del instructor
     duration: "",
     level: "",
     materials: "",
     image: "", // Aquí almacenamos la URL de la imagen
   });
+
+  const [teachers, setTeachers] = useState([]); // Estado para almacenar los instructores
+
+  useEffect(() => {
+    // Obtener la lista de instructores desde el backend
+    axios
+      .get(`${process.env.REACT_APP_SERVER_URL}/teachers`) // Ruta del backend para obtener los instructores
+      .then((response) => {
+        setTeachers(response.data); // Guardar los instructores en el estado
+      })
+      .catch((error) => {
+        console.error("Error al obtener los instructores:", error);
+      });
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -23,23 +37,34 @@ function CreateCourseForm({ setCourses }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Crear un objeto con los datos del curso
+    // Crear el objeto con los datos del curso
     const courseDataToSend = {
       courseName: courseData.title,
       courseDescription: courseData.description,
       courseLevel: courseData.level,
       courseDuration: courseData.duration,
       requiredMaterials: courseData.materials,
-      instructor: courseData.teacher, // Suponiendo que el "teacher" es el ID del instructor
-      image: courseData.image, // URL de la imagen
+      instructor: courseData.teacher, // El ID del instructor
+      image: courseData.image,
     };
 
-    // Enviar los datos como JSON
+    const token = localStorage.getItem("authToken");
+
+    if (!token) {
+      alert("No se encontró el token de autenticación. Por favor, inicie sesión.");
+      return;
+    }
+
+    // Enviar los datos al backend
     axios
-      .post(`${process.env.REACT_APP_SERVER_URL}/admin/courses`, courseDataToSend)
+      .post(`${process.env.REACT_APP_SERVER_URL}/admin/courses`, courseDataToSend, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Incluir el token de autenticación
+        },
+      })
       .then((response) => {
         console.log("Curso creado con éxito:", response.data);
-        setCourses((prevCourses) => [response.data, ...prevCourses]); // Añadimos el curso al estado
+        setCourses((prevCourses) => [response.data, ...prevCourses]); // Añadir el nuevo curso
       })
       .catch((err) => {
         console.error("Error al crear el curso:", err.response ? err.response.data : err.message);
@@ -105,16 +130,20 @@ function CreateCourseForm({ setCourses }) {
             <label htmlFor="teacher" className="block mb-2 text-sm font-medium text-gray-900">
               Teacher
             </label>
-            <input
-              type="text"
-              id="teacher"
+            <select
               name="teacher"
               value={courseData.teacher}
               onChange={handleInputChange}
               className="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-              placeholder="Enter teacher's name"
               required
-            />
+            >
+              <option value="" disabled>Select a teacher</option>
+              {teachers.map((teacher) => (
+                <option key={teacher._id} value={teacher._id}>
+                  {`${teacher.firstName} ${teacher.lastName}`} {/* Asumiendo que el campo 'name' contiene el nombre del instructor */}
+                </option>
+              ))}
+            </select>
           </div>
 
           {/* Course Duration */}
@@ -186,12 +215,16 @@ function CreateCourseForm({ setCourses }) {
           </div>
 
           {/* Submit Button */}
-          <button
-            type="submit"
-            className="w-full p-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300"
-          >
-            Create Course
-          </button>
+          <div className="flex justify-center mb-5">
+            <button
+              type="submit"
+              className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800"
+            >
+              <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent group-hover:dark:bg-transparent">
+                Create Course
+              </span>
+            </button>
+          </div>
         </form>
       </div>
     </div>
