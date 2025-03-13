@@ -32,19 +32,20 @@ function Navbar() {
       <div className="flex items-center justify-between">
         {/* Logo y título */}
         <div className="flex items-center">
-          <img src="/img/logo.png" alt="Logo" className="h-40 max-w-sm" />
-          <span className="ml-4 text-3xl font-bold mb-2">
-            <span className="text-blue-500">Gesture</span>{' '}
-            <span className="text-orange-500">Art</span>{' '}
-            <span className="text-gray-500">School</span>
-          </span>
+          <Link to="/">  {/* Aquí agregamos el Link para redirigir a la página de inicio */}
+            <img src="/img/logo.png" alt="Logo" className="h-40 max-w-sm" />
+          </Link>
+          <Link to="/">  {/* Aquí también envolvemos el nombre con Link */}
+            <span className="ml-4 text-3xl font-bold mb-2">
+              <span className="text-blue-500">Gesture</span>{' '}
+              <span className="text-orange-500">Art</span>{' '}
+              <span className="text-gray-500">School</span>
+            </span>
+          </Link>
         </div>
 
         {/* Menú de navegación */}
         <div className="flex items-center space-x-6 ml-0 mr-12">
-          <Link to="/">
-            <button className="text-gray hover:text-orange-500">Home</button>
-          </Link>
           <Link to="/courses" className="text-gray hover:text-orange-500">
             Courses
           </Link>
@@ -121,6 +122,7 @@ function Navbar() {
 }
 
 export default Navbar;
+
 
 
 
