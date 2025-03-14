@@ -1,67 +1,70 @@
-# Getting Started with Create React App
+Gesture Art School Client
+A React-based frontend application for the Gesture Art School platform.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Overview
+This project serves as the client-side interface for Gesture Art School, providing users with an interactive experience to access art courses, schedule sessions, and more.
+Technologies
 
-## Available Scripts
+React: v19.0.0
+React Router: v7.2.0
+Axios: v1.8.1
+React Calendar: v5.1.0
+TailwindCSS: v3.4.17
+Flowbite - Tailwind CSS component library
 
-In the project directory, you can run:
+Getting Started
+Prerequisites
 
-### `npm start`
+Node.js (latest stable version recommended)
+npm or yarn
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Installation
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Clone the repository
+Copygit clone <repository-url>
+cd gesture-art-school-client
 
-### `npm test`
+Install dependencies
+Copynpm install
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Start the development server
+Copynpm run dev
+or
+Copynpm start
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Available Scripts
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+start: Runs the app in development mode
+build: Builds the app for production and adds necessary Netlify redirects
+test: Runs the test suite
+eject: Ejects from react-scripts configuration
+dev: Alias for the start script
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Deployment
+The application is configured for deployment on Netlify with the necessary redirect rules for single-page application routing.
+Browser Support
+Production
 
-### `npm run eject`
+Browsers with >0.2% market share
+Not dead browsers
+No Opera Mini
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Development
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Latest Chrome version
+Latest Firefox version
+Latest Safari version
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Testing
+This project uses Jest and React Testing Library for testing components.
+Copynpm test
+Development Tools
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
+ESLint: Configured with react-app and react-app/jest extensions
+Vite: Configured as an alternative build tool
+Tailwind CSS: For styling components
+Nodemon: For auto-restarting during development
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
