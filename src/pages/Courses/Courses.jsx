@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../../context/auth.context";
 import { useNavigate } from "react-router-dom";
+import Recommendations from "../../components/CourseRecomendations/CourseRecomendations";
 
 function Courses() {
   const [courses, setCourses] = useState([]); // Lista de cursos disponibles
@@ -9,9 +10,10 @@ function Courses() {
   const [error, setError] = useState(null);
   const [courseToDelete, setCourseToDelete] = useState(null);
   const [showConfirmation, setShowConfirmation] = useState(false);
-
-  const { user, setUser } = useContext(AuthContext);  // Acceso al usuario desde el contexto
-  const navigate = useNavigate();  // Para redireccionar
+  const [recommendedCourse, setRecommendedCourse] = useState(null); // For recommended courses
+  const [userInterests, setUserInterests] = useState(""); 
+  const { user, setUser } = useContext(AuthContext);  
+  const navigate = useNavigate();  
 
   useEffect(() => {
     axios
@@ -105,6 +107,39 @@ function Courses() {
     setCourseToDelete(null);
   };
 
+  // Función para manejar la recomendación de cursos
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("/courses/recommendations", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ courseDescription: userInterests }),
+      });
+
+      if (!response.ok) {
+        console.error("Error en la respuesta del servidor:", response.status);
+        return;
+      }
+
+      const data = await response.json();
+      const parsedRecommendation = parseGeminiResponse(data.recommendations);
+      setRecommendedCourse(findCourse(parsedRecommendation.description));
+    } catch (error) {
+      console.error("Error al obtener recomendaciones:", error);
+    }
+  };
+
+  const parseGeminiResponse = (geminiResponse) => {
+    return JSON.parse(geminiResponse);
+  };
+
+  const findCourse = (courseDescription) => {
+    return courses.find((course) => course.courseDescription === courseDescription);
+  };
+
   // Si está cargando los cursos
   if (loading) {
     return <div className="text-center text-lg text-blue-500">Cargando cursos...</div>;
@@ -115,32 +150,8 @@ function Courses() {
       <h1 className="text-3xl font-semibold text-center text-blue-500 mb-8">Available Courses</h1>
       {error && <div className="text-red-500 text-center mb-4">{error}</div>}
 
-      {/* Modal de confirmación */}
-      {showConfirmation && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">Confirm Deletion</h3>
-            <p className="text-gray-700 mb-6">
-              Are you sure you want to delete the course "{courseToDelete.name}"? This action cannot be undone.
-            </p>
-            <div className="flex justify-end space-x-4">
-              <button
-                onClick={cancelDelete}
-                className="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={deleteCourse}
-                className="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
-              >
-                Delete
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
+      <Recommendations/>
+      
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {courses.map((course) => (
           <div

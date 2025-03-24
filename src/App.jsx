@@ -19,11 +19,11 @@ import IsAnon from "./components/IsAnon/IsAnon";
 import EditCourseForm from "./components/EditCourse/EditCourseForm";
 
 
+
 function App() {
   return (
     <div className="App">
       <Navbar />
-
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/gallery" element={<Gallery />} />
