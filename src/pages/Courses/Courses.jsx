@@ -10,8 +10,6 @@ function Courses() {
   const [error, setError] = useState(null);
   const [courseToDelete, setCourseToDelete] = useState(null);
   const [showConfirmation, setShowConfirmation] = useState(false);
-  const [recommendedCourse, setRecommendedCourse] = useState(null); // For recommended courses
-  const [userInterests, setUserInterests] = useState(""); 
   const { user, setUser } = useContext(AuthContext);  
   const navigate = useNavigate();  
 
@@ -105,39 +103,6 @@ function Courses() {
   const cancelDelete = () => {
     setShowConfirmation(false);
     setCourseToDelete(null);
-  };
-
-  // Función para manejar la recomendación de cursos
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch("/courses/recommendations", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ courseDescription: userInterests }),
-      });
-
-      if (!response.ok) {
-        console.error("Error en la respuesta del servidor:", response.status);
-        return;
-      }
-
-      const data = await response.json();
-      const parsedRecommendation = parseGeminiResponse(data.recommendations);
-      setRecommendedCourse(findCourse(parsedRecommendation.description));
-    } catch (error) {
-      console.error("Error al obtener recomendaciones:", error);
-    }
-  };
-
-  const parseGeminiResponse = (geminiResponse) => {
-    return JSON.parse(geminiResponse);
-  };
-
-  const findCourse = (courseDescription) => {
-    return courses.find((course) => course.courseDescription === courseDescription);
   };
 
   // Si está cargando los cursos
