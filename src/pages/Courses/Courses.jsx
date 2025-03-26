@@ -116,6 +116,33 @@ function Courses() {
       {error && <div className="text-red-500 text-center mb-4">{error}</div>}
 
       <Recommendations/>
+
+      <br/>
+{/* Modal de confirmación */}
+{showConfirmation && (
+         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+           <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
+             <h3 className="text-xl font-semibold text-gray-900 mb-4">Confirm Deletion</h3>
+             <p className="text-gray-700 mb-6">
+               Are you sure you want to delete the course "{courseToDelete.name}"? This action cannot be undone.
+             </p>
+             <div className="flex justify-end space-x-4">
+               <button
+                 onClick={cancelDelete}
+                 className="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
+               >
+                 Cancel
+               </button>
+               <button
+                 onClick={deleteCourse}
+                  className="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
+               >
+                 Delete
+               </button>
+             </div>
+           </div>
+         </div>
+       )}
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {courses.map((course) => (
